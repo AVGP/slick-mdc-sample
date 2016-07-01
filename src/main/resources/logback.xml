@@ -1,0 +1,39 @@
+<configuration scan="true">
+  <include resource="common-logback.xml"/>
+
+  <include resource="base-logback.xml"/>
+
+<!--
+  <logger name="com.archilogic.jsonrpc" level="TRACE" />
+  <logger name="com.archilogic.filestore" level="TRACE" />
+  <logger name="com.archilogic.keyvaluestore" level="TRACE" />
+-->
+
+<!-- Disable Logback internal logging at startup -->
+<statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+<!-- Release logging resources on application termination -->
+<shutdownHook/>
+
+<!-- Default pattern -->
+<property name="defaultPattern" value="%date \(%level\) [%thread] [%X{requestId}]: %message" />
+
+<!-- Standard console logging -->
+<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+  <encoder>
+    <pattern>%date \(%level\) [%thread] [%X{requestId}]: %message%n</pattern>
+  </encoder>
+</appender>
+
+<!-- Simple console logging -->
+<appender name="SimpleConsole" class="ch.qos.logback.core.ConsoleAppender">
+  <encoder>
+    <pattern>%date \(%level\): %message%n</pattern>
+  </encoder>
+</appender>
+
+
+  <root level="${LOG_LEVEL:-DEBUG}">
+    <appender-ref ref="Console" />
+  </root>
+</configuration>
